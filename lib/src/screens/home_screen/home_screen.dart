@@ -2,10 +2,14 @@ import 'package:domus/config/size_config.dart';
 import 'package:domus/provider/base_view.dart';
 import 'package:domus/src/screens/edit_profile/edit_profile.dart';
 import 'package:domus/src/screens/favourites_screen/favourites_screen.dart';
+import 'package:domus/src/screens/home_screen/components/dark_container.dart';
+import 'package:domus/src/screens/smart_ac/smart_ac.dart';
+import 'package:domus/src/screens/smart_light/smart_light.dart';
 import 'package:domus/src/widgets/custom_bottom_nav_bar.dart';
 import 'package:domus/view/home_screen_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'components/body.dart';
 import 'package:domus/src/screens/menu_page/menu_screen.dart';
@@ -139,16 +143,68 @@ class HomeScreen extends StatelessWidget {
                   Body(
                     model: model,
                   ),
-                  Body(
-                    model: model,
-                  ),
+
+                 Container(
+                  color: Colors.grey[100],
+                 
+                   child: Column(
+                    
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                   
+                     children:[ 
+                      SizedBox(height: 20,),
+                      Row(
+                                   children: [
+                                     Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                        child: DarkContainer(
+                          itsOn: model.isLightOn,
+                          switchButton: model.lightSwitch,
+                          onTap: () {
+                            Navigator.of(context).pushNamed(SmartLight.routeName);
+                          },
+                          iconAsset: 'assets/icons/svg/light.svg',
+                          device: 'Lightening',
+                          deviceCount: '4 lamps',
+                          switchFav: model.lightFav,
+                          isFav: model.isLightFav,
+                        ),
+                      ),
+                                     ),
+                                     Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                        child: DarkContainer(
+                          itsOn: model.isACON,
+                          switchButton: model.acSwitch,
+                          onTap: () {
+                            Navigator.of(context).pushNamed(SmartAC.routeName);
+                          },
+                          iconAsset: 'assets/icons/svg/ac.svg',
+                          device: 'AC',
+                          deviceCount: '4 devices',
+                          switchFav: model.acFav,
+                          isFav: model.isACFav,
+                        ),
+                      ),
+                                     ),
+                                   
+                                   
+                                   ],
+                                 ),
+                     ]
+                   ),
+                 ),
+            
+                 
                   
                   const Center(
                     child: Text('under construction'),
                   ),
                 ],
               ),
-              bottomNavigationBar: CustomBottomNavBar(model: model),
+            
             ),
           );
         });

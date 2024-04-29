@@ -75,8 +75,10 @@ class Body extends StatelessWidget {
                     ),
                   ),
                 ),
+              
+              
               ],
-            ),
+            ),  
             Padding(
               padding: EdgeInsets.all(getProportionateScreenHeight(5)),
               child: const MusicWidget(),
